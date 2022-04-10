@@ -47,7 +47,7 @@ class intervalTimer {
     bool check() {
       if (millis()>=timer) {
         if (active && counter!=0) {
-          if (count>0) { counter--; }
+          if (count>0 && counter>0 ) { counter--; }
           timer=millis()+time; return true; }
         else { return false; } }
       else { return false; } } };
