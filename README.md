@@ -26,3 +26,16 @@ The following methods are supported:
 * set(time,active,count) - Set time, active and count.
 * set(time,active,count,call) - Set time, active, count and call.
 * check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call parameter not false.
+
+### Basic example
+Outputs "exampleOne" on the serial interface once per second.
+
+    #include "intervalTimer.h"
+    
+    void doExampleOne() { Serial.println("exampleOne"); }
+    
+    intervalTimer exampleOne(1000,true,-1,doExampleOne);
+    
+    void setup() { Serial.begin(115200); }
+    
+    void loop() { exampleOne.check(); }
