@@ -9,7 +9,7 @@ Four attributes are used for parameterization:
 * uint32_t time - The time between two intervals in milliseconds. (default value 1000)
 * bool active - Activates and deactivates the interval timer. (default value false)
 * int count - The number of cycles. -1 for infinite operation. (default value -1)
-* void call - A function pointer to call a specific function. (default value false)
+* void call - A function pointer to call a specific function. (default value NULL)
 
 The following methods are supported:
 
@@ -25,7 +25,7 @@ The following methods are supported:
 * set(time,active) - Set time and active.
 * set(time,active,count) - Set time, active and count.
 * set(time,active,count,call) - Set time, active, count and call.
-* check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call parameter not false.
+* check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call parameter not NULL.
 
 ### Basic example
 Outputs "exampleOne" on the serial interface once per second.

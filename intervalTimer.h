@@ -10,7 +10,7 @@
 // * uint32_t time - The time between two intervals in milliseconds. (default value 1000)
 // * bool active - Activates and deactivates the interval timer. (default value false)
 // * int count - The number of cycles. -1 for infinite operation. (default value -1)
-// * void call - A function pointer to call a specific function. (default value false)
+// * void call - A function pointer to call a specific function. (default value NULL)
 //
 // The following methods are supported:
 //
@@ -26,7 +26,7 @@
 // * set(time,active) - Set time and active.
 // * set(time,active,count) - Set time, active and count.
 // * set(time,active,count,call) - Set time, active, count and call.
-// * check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call parameter not false.
+// * check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call parameter not NULL.
 
 #ifndef INTERVAL_TIMER_H
 #define INTERVAL_TIMER_H
@@ -38,7 +38,7 @@ class intervalTimer {
     bool active=false;
     int counter=-1;
     int count=-1;
-    void (*call)(void)=false;
+    void (*call)(void)=NULL;
     intervalTimer() { }
     intervalTimer(uint32_t value1) { timer=millis()+value1; time=value1; }
     intervalTimer(uint32_t value1,bool value2) { timer=millis()+value1; time=value1; active=value2; }
@@ -55,7 +55,7 @@ class intervalTimer {
       if (millis()>=timer) {
         if (active && counter!=0) {
           if (count>0 && counter>0) { counter--; }
-          timer=millis()+time; if (call) { call(); } return true; }
+          timer=millis()+time; if (call!=NULL) { call(); } return true; }
         else { return false; } }
       else { return false; } } };
 

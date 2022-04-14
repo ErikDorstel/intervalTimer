@@ -4,15 +4,15 @@
 #include "intervalTimer.h"
 
 // instantiates the intervalTimer class to exampleOne with the
-// default parameters time=1000; active=false; count=-1; call=false;
+// default parameters time=1000; active=false; count=-1; call=NULL;
 intervalTimer exampleOne;
 
 // instantiates the intervalTimer class to exampleTwo with the
-// parameters time=2000; active=true; count=5; call=false;
+// parameters time=2000; active=true; count=5; call=NULL;
 intervalTimer exampleTwo(2000,true,5);
 
 // instantiates the intervalTimer class to exampleThree with the
-// default parameters time=1000; active=false; count=-1; call=false;
+// default parameters time=1000; active=false; count=-1; call=NULL;
 intervalTimer exampleThree;
 
 void doExampleThree() {
