@@ -39,18 +39,23 @@ class intervalTimer {
     int counter=-1;
     int count=-1;
     void (*call)(void)=NULL;
+
     intervalTimer() { }
     intervalTimer(uint32_t value1) { timer=millis()+value1; time=value1; }
     intervalTimer(uint32_t value1,bool value2) { timer=millis()+value1; time=value1; active=value2; }
     intervalTimer(uint32_t value1,bool value2,int value3) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; }
     intervalTimer(uint32_t value1,bool value2,int value3,void (*value4)(void)) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
-    void enable() { active=true; }
-    void disable() { active=false; }
-    void reset() { timer=millis()+time; counter=count; }
+
     void set(uint32_t value1) { timer=millis()+value1; time=value1; }
     void set(uint32_t value1,bool value2) { timer=millis()+value1; time=value1; active=value2; }
     void set(uint32_t value1,bool value2,int value3) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; }
     void set(uint32_t value1,bool value2,int value3,void (*value4)(void)) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
+
+    void enable() { active=true; }
+    void disable() { active=false; }
+
+    void reset() { timer=millis()+time; counter=count; }
+
     bool check() {
       if (millis()>=timer) {
         if (active && counter!=0) {

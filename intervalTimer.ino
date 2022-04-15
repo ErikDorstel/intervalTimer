@@ -22,7 +22,7 @@ void doExampleThree() {
   Serial.print(exampleThree.timer); Serial.print(",");
   Serial.print(exampleThree.time); Serial.print(",");
   Serial.print(exampleThree.counter); Serial.print(",");
-  Serial.print(exampleThree.count); Serial.print("\n"); }
+  Serial.print(exampleThree.count); Serial.print("\r\n"); }
 
 void setup() {
   Serial.begin(115200); delay(500);
@@ -37,11 +37,11 @@ void loop() {
     Serial.print(exampleOne.timer); Serial.print(",");
     Serial.print(exampleOne.time); Serial.print(",");
     Serial.print(exampleOne.counter); Serial.print(",");
-    Serial.print(exampleOne.count); Serial.print("\n"); }
+    Serial.print(exampleOne.count); Serial.print("\r\n"); }
   if (exampleTwo.check()) {
     Serial.print("exampleTwo"); Serial.print(",");
     Serial.print(exampleTwo.timer); Serial.print(",");
     Serial.print(exampleTwo.time); Serial.print(",");
     Serial.print(exampleTwo.counter); Serial.print(",");
-    Serial.print(exampleTwo.count); Serial.print("\n"); }
+    Serial.print(exampleTwo.count); Serial.print("\r\n"); }
   exampleThree.check(); }
