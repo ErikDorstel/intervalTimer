@@ -10,23 +10,16 @@
 // * uint32_t time - The time between two intervals in milliseconds. (default value 1000)
 // * bool active - Activates and deactivates the interval timer. (default value false)
 // * int count - The number of cycles. -1 for infinite operation. (default value -1)
-// * void call - A function pointer to call a specific function. (default value NULL)
+// * void call - A function pointer to call a specific function. (default nullptr)
 //
 // The following methods are supported:
 //
-// * constructor - Set nothing, all parameters are set to default.
-// * constructor(time) - Set time.
-// * constructor(time,active) - Set time and active.
-// * constructor(time,active,count) - Set time, active and count.
-// * constructor(time,active,count,call) - Set time, active, count and call.
+// * constructor(time,active,count,call)
 // * enable() - Set active to true.
 // * disable() - Set active to false.
 // * reset() - The interval time and the cycle counter are set to the start value.
-// * set(time) - Set time.
-// * set(time,active) - Set time and active.
-// * set(time,active,count) - Set time, active and count.
-// * set(time,active,count,call) - Set time, active, count and call.
-// * check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call parameter not NULL.
+// * set(time,active,count,call)
+// * check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call not nullptr.
 
 #ifndef INTERVAL_TIMER_H
 #define INTERVAL_TIMER_H
@@ -38,18 +31,13 @@ class intervalTimer {
     bool active=false;
     int counter=-1;
     int count=-1;
-    void (*call)(void)=NULL;
+    void (*call)(void)=nullptr;
 
-    intervalTimer() { }
-    intervalTimer(uint32_t value1) { timer=millis()+value1; time=value1; }
-    intervalTimer(uint32_t value1,bool value2) { timer=millis()+value1; time=value1; active=value2; }
-    intervalTimer(uint32_t value1,bool value2,int value3) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; }
-    intervalTimer(uint32_t value1,bool value2,int value3,void (*value4)(void)) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
+    intervalTimer(uint32_t value1=1000,bool value2=false,int value3=-1,void (*value4)(void)=nullptr) {
+      timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
 
-    void set(uint32_t value1) { timer=millis()+value1; time=value1; }
-    void set(uint32_t value1,bool value2) { timer=millis()+value1; time=value1; active=value2; }
-    void set(uint32_t value1,bool value2,int value3) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; }
-    void set(uint32_t value1,bool value2,int value3,void (*value4)(void)) { timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
+    void set(uint32_t value1=1000,bool value2=false,int value3=-1,void (*value4)(void)=nullptr) {
+      timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
 
     void enable() { active=true; }
     void disable() { active=false; }
@@ -60,7 +48,7 @@ class intervalTimer {
       if (millis()>=timer) {
         if (active && counter!=0) {
           if (count>0 && counter>0) { counter--; }
-          timer=millis()+time; if (call!=NULL) { call(); } return true; }
+          timer=millis()+time; if (call!=nullptr) { call(); } return true; }
         else { return false; } }
       else { return false; } } };
 
