@@ -9,35 +9,39 @@
 //
 // * uint32_t time - The time between two intervals in milliseconds. (default value 1000)
 // * bool active - Activates and deactivates the interval timer. (default value false)
-// * int count - The number of cycles. -1 for infinite operation. (default value -1)
+// * uint32_t start - The time after which the first interval starts. (default value 1000)
+// * int count - The number of cycles. infinite for infinite operation. (default value infinite)
 // * void call - A function pointer to call a specific function. (default nullptr)
 //
 // The following methods are supported:
 //
-// * constructor(time,active,count,call)
+// * constructor(time,active,start,count,call)
 // * enable() - Set active to true.
 // * disable() - Set active to false.
-// * reset() - The interval time and the cycle counter are set to the start value.
-// * set(time,active,count,call)
+// * reset() - The interval time and the cycle counter are set to the start values.
+// * set(time,active,start,count,call)
 // * check() - Checks whether the next interval has been reached. Returns true or false. Calls a function if call not nullptr.
 
 #ifndef INTERVAL_TIMER_H
 #define INTERVAL_TIMER_H
 
+#define infinite -1
+
 class intervalTimer {
   public:
-    uint32_t timer=1000;
+    uint32_t timer;
     uint32_t time=1000;
     bool active=false;
-    int counter=-1;
-    int count=-1;
+    uint32_t start=1000;
+    int counter=infinite;
+    int count=infinite;
     void (*call)(void)=nullptr;
 
-    intervalTimer(uint32_t value1=1000,bool value2=false,int value3=-1,void (*value4)(void)=nullptr) {
-      timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
+    intervalTimer(uint32_t value1=1000,bool value2=false,uint32_t value3=1000,int value4=infinite,void (*value5)(void)=nullptr) {
+      time=value1; active=value2; timer=millis()+value3; counter=value4; count=value4; call=value5; }
 
-    void set(uint32_t value1=1000,bool value2=false,int value3=-1,void (*value4)(void)=nullptr) {
-      timer=millis()+value1; time=value1; active=value2; counter=value3; count=value3; call=value4; }
+    void set(uint32_t value1=1000,bool value2=false,uint32_t value3=1000,int value4=infinite,void (*value5)(void)=nullptr) {
+      time=value1; active=value2; timer=millis()+value3; counter=value4; count=value4; call=value5; }
 
     void enable() { active=true; }
     void disable() { active=false; }
