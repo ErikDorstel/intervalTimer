@@ -5,7 +5,7 @@
 // This library defines a C++ class which makes it possible to control the call of code parts
 // within functions or functions at timed intervals. The Arduino function millis() is required.
 //
-// Four attributes are used for parameterization:
+// Five attributes are used for parameterization:
 //
 // * uint32_t time - The time between two intervals in milliseconds. (default value 1000)
 // * bool active - Activates and deactivates the interval timer. (default value false)
@@ -43,7 +43,7 @@ class intervalTimer {
     void set(uint32_t value1=1000,bool value2=false,uint32_t value3=1000,int value4=infinite,void (*value5)(void)=nullptr) {
       time=value1; active=value2; timer=millis()+value3; counter=value4; count=value4; call=value5; }
 
-    void enable() { active=true; }
+    void enable() { active=true; timer=millis()+start; }
     void disable() { active=false; }
 
     void reset() { timer=millis()+time; counter=count; }
