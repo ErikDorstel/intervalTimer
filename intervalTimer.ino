@@ -4,7 +4,7 @@
 #include "intervalTimer.h"
 
 // instantiates the intervalTimer class to exampleOne with the
-// default parameters time=1000; active=false; start=1000; count=infinite; call=NULL;
+// default parameters time=1000; active=false; start=1000; count=itInfinite; call=NULL;
 intervalTimer exampleOne;
 
 // instantiates the intervalTimer class to exampleTwo with the
@@ -12,7 +12,7 @@ intervalTimer exampleOne;
 intervalTimer exampleTwo(2000,true,0,5);
 
 // instantiates the intervalTimer class to exampleThree with the
-// default parameters time=1000; active=false; start=1000; count=infinite; call=NULL;
+// default parameters time=1000; active=false; start=1000; count=itInfinite; call=NULL;
 intervalTimer exampleThree;
 
 void doExampleThree() {
@@ -29,7 +29,7 @@ void setup() {
   // set the object exampleOne attributes to active=true;
   exampleOne.enable();
   // set the object exampleThree attributes to time=20000; active=true; start=20000; count=infinite; call=doExampleThree;
-  exampleThree.set(20000,true,20000,infinite,doExampleThree); }
+  exampleThree.set(20000,true,20000,itInfinite,doExampleThree); }
 
 void loop() {
   if (exampleOne.check()) {
